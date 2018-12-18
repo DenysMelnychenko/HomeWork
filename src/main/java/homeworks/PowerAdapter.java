@@ -12,7 +12,8 @@ public class PowerAdapter {
         (inputVoltage > 250) ? "Hight Voltage" : ((inputVoltage < 200) ? "Low Voltage" : "Start"));
   }
 
-  public String getInfo() {
+  @Override
+  public String toString() {
     return String.format("%4$s inputVoltage: %1$d output1Voltage: %2$d output2Voltage: %3$d %5$s",
         inputVoltage, output1.getValue(), output2.getValue(), (status) ? "Turn On" : "Turn Off",
         (inputVoltage > 250) ? "Hight Voltage" : ((inputVoltage < 200) ? "Low Voltage" : "Start"));
