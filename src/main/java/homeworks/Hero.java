@@ -1,54 +1,88 @@
 package homeworks;
 
 public class Hero {
-  private double intelegence;
-  private double agility;
-  private double strenth;
-  private double strike = intelegence / 3 + agility / 2 + strenth;
-  private double health;
+  private Item[] bag;
+  private int intelegence;
+  private int agility;
+  private int strength;
+  private int strike;
+  private int health;
+  private static double ultimateChance = 0.35;
 
-  public Hero(double intelegence, double agility, double strenth, double health) {
-    super();
+  public Hero(int intelegence, int agility, int strenth, int health) {
     this.intelegence = intelegence;
     this.agility = agility;
-    this.strenth = strenth;
+    this.strength = strenth;
     this.health = health;
+    bag = new Item[2];
   }
 
-  public double getIntelegence() {
+  public int getIntelegence() {
     return intelegence;
   }
 
-  public void setIntelegence(double intelegence) {
+  public void setIntelegence(int intelegence) {
     this.intelegence = intelegence;
   }
 
-  public double getAgility() {
+  public int getAgility() {
     return agility;
   }
 
-  public void setAgility(double agility) {
+  public void setAgility(int agility) {
     this.agility = agility;
   }
 
-  public double getStrenth() {
-    return strenth;
+  public int getStrength() {
+    return strength;
   }
 
-  public void setStrenth(double strenth) {
-    this.strenth = strenth;
+  public void setStrength(int strenth) {
+    this.strength = strenth;
   }
 
-  public double getHealth() {
+  public int getHealth() {
+
     return health;
   }
 
-  public void setHealth(double health) {
+  public void setHealth(int health) {
     this.health = health;
   }
 
-  public double getStrike() {
-    return strike;
+  public int getStrike() {
+    return getIntelegence() / 3 + getAgility() / 2 + getStrength() + ultimate();
+  }
+
+
+
+  public Item[] getBag() {
+    return bag;
+  }
+
+  public void setItem(Item item) {
+    if (item != null) {
+      for (int i = 0; i < bag.length; i++) {
+        if (bag[i] == null) {
+          bag[i] = item;
+          intelegence += bag[i].getIntelegence();
+          agility += bag[i].getAgility();
+          strength += bag[i].getStrength();
+          health += bag[i].getHealth();
+        }
+
+      }
+    }
+  }
+
+  private int ultimate() {
+    if ((int) ultimateChance >= 1) {
+      ultimateChance = 0.35;
+      return 2 * strike;
+    }
+    ultimateChance++;
+    return 0;
+
   }
 
   @Override
@@ -58,7 +92,7 @@ public class Hero {
     result = (int) (prime * result + agility);
     result = (int) (prime * result + health);
     result = (int) (prime * result + intelegence);
-    result = (int) (prime * result + strenth);
+    result = (int) (prime * result + strength);
     result = (int) (prime * result + strike);
     return result;
   }
@@ -78,7 +112,7 @@ public class Hero {
       return false;
     if (intelegence != other.intelegence)
       return false;
-    if (strenth != other.strenth)
+    if (strength != other.strength)
       return false;
     if (strike != other.strike)
       return false;
@@ -87,7 +121,7 @@ public class Hero {
 
   @Override
   public String toString() {
-    return "Hero [intelegence=" + intelegence + ", agility=" + agility + ", strenth=" + strenth
+    return "Hero [intelegence=" + intelegence + ", agility=" + agility + ", strenth=" + strength
         + ", strike=" + strike + ", health=" + health + "]";
   }
 
