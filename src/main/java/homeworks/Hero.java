@@ -1,13 +1,13 @@
 package homeworks;
 
-public class Hero {
+public abstract class Hero {
   private Item[] bag;
   private int intelegence;
   private int agility;
   private int strength;
   private int strike;
   private int health;
-  private static double ultimateChance = 0.35;
+
 
   public Hero(int intelegence, int agility, int strenth, int health) {
     this.intelegence = intelegence;
@@ -50,12 +50,6 @@ public class Hero {
     this.health = health;
   }
 
-  public int getStrike() {
-    return getIntelegence() / 3 + getAgility() / 2 + getStrength() + ultimate();
-  }
-
-
-
   public Item[] getBag() {
     return bag;
   }
@@ -75,15 +69,9 @@ public class Hero {
     }
   }
 
-  private int ultimate() {
-    if ((int) ultimateChance >= 1) {
-      ultimateChance = 0.35;
-      return 2 * strike;
-    }
-    ultimateChance++;
-    return 0;
+  abstract int ultimate();
 
-  }
+  protected abstract int getStrike();
 
   @Override
   public int hashCode() {
@@ -124,6 +112,8 @@ public class Hero {
     return "Hero [intelegence=" + intelegence + ", agility=" + agility + ", strenth=" + strength
         + ", strike=" + strike + ", health=" + health + "]";
   }
+
+  protected abstract Object getName();
 
 
 }
