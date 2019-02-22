@@ -20,7 +20,8 @@ public class Miner implements Runnable {
       if (goldMine.getGoldAmmount() == 1) {
         setMinerAmountOfGold(goldMine.getGoldAmmount());
         goldMine.setNotEmpty(false);
-        System.out.printf("Miner %s mined the last one \n", name);
+        System.out.printf("Miner %s mined the last one  and he got %d gramms of gold!  \n", name,
+            amountOfGold);
       } else {
         setMinerAmountOfGold(SPEED_OF_MINING);
         goldMine.setGoldAmmount(goldMine.getGoldAmmount() - SPEED_OF_MINING);
@@ -33,7 +34,7 @@ public class Miner implements Runnable {
         }
       }
     }
-    System.out.println("There are no more gold here");
+    Thread.currentThread().interrupt();
   }
 
   public int getMinerAmountOfGold() {
