@@ -1,7 +1,7 @@
 package homeworks;
 
 public class GoldenMine {
-  private int goldAmmount = 1000;
+  private volatile int goldAmmount = 1000;
   private boolean notEmpty = true;
 
   private GoldenMine() {}
@@ -16,19 +16,28 @@ public class GoldenMine {
   }
 
   public int getGoldAmmount() {
-    return goldAmmount;
+    synchronized (this) {
+      return goldAmmount;
+    }
+
   }
 
   public void setGoldAmmount(int goldAmmount) {
-    this.goldAmmount = goldAmmount;
+    synchronized (this) {
+      this.goldAmmount = goldAmmount;
+    }
   }
 
   public boolean isNotEmpty() {
-    return notEmpty;
+    synchronized (this) {
+      return notEmpty;
+    }
   }
 
   public void setNotEmpty(boolean notEmpty) {
-    this.notEmpty = notEmpty;
+    synchronized (this) {
+      this.notEmpty = notEmpty;
+    }
   }
 
 
